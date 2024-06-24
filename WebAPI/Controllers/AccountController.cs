@@ -128,13 +128,5 @@ namespace WebAPI.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet("Admin")]
-        public async Task<IActionResult> Admin()
-        {
-            var users = await _userManager.Users.ToListAsync();
-            return Ok(users);
-        }
-
     }
 }
