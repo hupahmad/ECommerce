@@ -25,9 +25,16 @@ namespace WebAPI.Repos
             return category;
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            if (category == null)
+            {
+                return false;
+            }
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+            return true;
         }
 
         public async Task<List<Category>> GetAllAsync()

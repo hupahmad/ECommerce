@@ -57,5 +57,21 @@ namespace WebAPI.Controllers
             return Created();
         }
 
+        [HttpDelete]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete([FromQuery] string name)
+        {
+            var category = await _categoryRepo.GetByNameAsync(name);
+            if (category == null)
+            {
+                return NotFound("Category not found");
+            }
+            if(await _categoryRepo.DeleteAsync(category.Id))
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
     }
 }
