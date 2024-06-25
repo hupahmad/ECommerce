@@ -19,7 +19,7 @@ namespace WebAPI.Services
         public async Task CreateRoles()
         {
 
-            var _user = await _userManager.FindByEmailAsync("admin@email.com");
+            var _user = await _userManager.FindByEmailAsync(_configuration["Admin:Email"]!);
 
             // check if the user exists
             if (_user == null)

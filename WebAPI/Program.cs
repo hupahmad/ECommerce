@@ -113,7 +113,7 @@ builder.Services.AddAuthentication(options =>
 
 
 
-var create = new CreateAdminService(builder.Services.BuildServiceProvider().GetService<UserManager<AppUser>>());
+var create = new CreateAdminService(builder.Services.BuildServiceProvider().GetService<UserManager<AppUser>>(), builder.Configuration);
 
 
 
