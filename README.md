@@ -3,4 +3,4 @@
 
 ### Admin
 username : admin \
-password : Password_0 \
+password : Password_0
