@@ -5,5 +5,5 @@ In this project i used **PostgreSQL** for database and **JWT** for authenticatio
 ### Demo: http://147.135.51.66:5000/swagger/index.html
 
 ### Admin
-username : admin \
+username : admin\
 password : Password_0
