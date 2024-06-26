@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using WebAPI.Data;
 using WebAPI.Interface;
@@ -51,6 +52,7 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 
+builder.Services.AddResponseCaching();
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
@@ -127,6 +129,19 @@ var app = builder.Build();
 // }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles(
+    new StaticFileOptions
+    {
+        OnPrepareResponse = ctx =>
+        {
+            const int month = 30 * 24 * 60 * 60;
+            ctx.Context.Response.Headers[HeaderNames.CacheControl] = "public,max-age=" + month;
+        }
+    }
+);
+
+app.UseResponseCaching();
 
 app.MapControllers();
 
